@@ -10,76 +10,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link rel="stylesheet" href="./css/index.css" />
   </head>
+
   <body class="background">
     <div class="container">
       <div class="input-container">
-        <input type="text" class="input-field" placeholder="Add a new task" />
-        <button class="plus-btn">
+        <input type="text" class="input-field" id="input" placeholder="Add a new task" />
+        <button class="plus-btn" id="plus-btn">
           <svg class="icon-plus">
             <use href="./sprite.svg#icon-plus"></use>
           </svg>
         </button>
       </div>
 
-      <h2 class="title">Tasks to do - <span>4</span></h2>
+      <h2 class="title">Tasks to do - <span id="tasks-amount"></span></h2>
 
-      <ul class="task-list">
-        <li class="task-item">
-          <p>To study React fundamentals</p>
-          <div class="icon-container">
-            <button class="task-btn">
-              <svg class="icon-check"><use href="./sprite.svg#icon-check"></use></svg>
-            </button>
+      <ul class="task-list" id="task-list"></ul>
 
-            <button class="task-btn">
-              <svg class="icon-trash"><use href="./sprite.svg#icon-trash"></use></svg>
-            </button>
-          </div>
-        </li>
-        <li class="task-item">
-          <p>To study React fundamentals</p>
-          <div class="icon-container">
-            <button class="task-btn">
-              <svg class="icon-check"><use href="./sprite.svg#icon-check"></use></svg>
-            </button>
-
-            <button class="task-btn">
-              <svg class="icon-trash"><use href="./sprite.svg#icon-trash"></use></svg>
-            </button>
-          </div>
-        </li>
-        <li class="task-item">
-          <p>To study React fundamentals</p>
-          <div class="icon-container">
-            <button class="task-btn">
-              <svg class="icon-check"><use href="./sprite.svg#icon-check"></use></svg>
-            </button>
-
-            <button class="task-btn">
-              <svg class="icon-trash"><use href="./sprite.svg#icon-trash"></use></svg>
-            </button>
-          </div>
-        </li>
-        <li class="task-item">
-          <p>To study React fundamentals</p>
-          <div class="icon-container">
-            <button class="task-btn">
-              <svg class="icon-check"><use href="./sprite.svg#icon-check"></use></svg>
-            </button>
-
-            <button class="task-btn">
-              <svg class="icon-trash"><use href="./sprite.svg#icon-trash"></use></svg>
-            </button>
-          </div>
-        </li>
-      </ul>
-
-      <h2 class="title">Done - <span>4</span></h2>
+      <h2 class="title">Done - <span id="done-tasks-amount"></span></h2>
 
       <ul>
         <li class="task-item-done">To study React fundamentals</li>
       </ul>
     </div>
+
     <script src="./index.js" type="module"></script>
   </body>
 </html>
