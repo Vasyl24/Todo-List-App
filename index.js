@@ -4,7 +4,7 @@ const taskList = document.querySelector('#task-list');
 const tasksAmount = document.querySelector('#tasks-amount');
 const doneTasksAmount = document.querySelector('#done-tasks-amount');
 const check = document.querySelector('#check');
-const deleteBtn = document.querySelector('#delete');
+// const deleteBtn = document.querySelector('#deleteBtn');
 
 const taskListArr = [
   { id: 1, task: 'To study React fundamentals' },
@@ -12,7 +12,6 @@ const taskListArr = [
   { id: 3, task: 'To study React fundamentals' },
   { id: 4, task: 'To study React fundamentals' },
 ];
-
 const doneTask = [{ id: 4, task: 'To study React fundamentals' }];
 
 const existTasks = localStorage.getItem('tasks');
@@ -32,7 +31,7 @@ const updateMarkup = (tasks) => {
               <svg class="icon-check"><use href="./sprite.svg#icon-check"></use></svg>
             </button>
 
-            <button class="task-btn" id="deleteBtn">
+            <button class="task-btn" id="deleteBtn" key='${taskItem.id}'>
               <svg class="icon-trash"><use href="./sprite.svg#icon-trash"></use></svg>
             </button>
           </div>
@@ -57,3 +56,14 @@ addBtn.addEventListener('click', () => {
 
   input.value = '';
 });
+
+const onDelete = (e) => {
+  const deleteBtn = e.target.closest('#deleteBtn');
+
+  if (deleteBtn) {
+    const task = e.target.closest('.task-item').key;
+    console.log(task);
+  }
+};
+
+taskList.addEventListener('click', onDelete);
