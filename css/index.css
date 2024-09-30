@@ -117,3 +117,7 @@
 
   cursor: pointer;
 }
+
+.task-item-done:not(:last-child) {
+  margin-bottom: 16px;
+}
