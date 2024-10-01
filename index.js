@@ -7,19 +7,13 @@ const tasksAmount = document.querySelector('#tasks-amount');
 const taskListDone = document.querySelector('#task-list-done');
 const doneTasksAmount = document.querySelector('#done-tasks-amount');
 
-const taskListArr = [
+const taskListArr = JSON.parse(localStorage.getItem('tasks')) || [
   { id: 1, task: 'To study React fundamentals' },
   { id: 2, task: 'To study React fundamentals' },
   { id: 3, task: 'To study React fundamentals' },
   { id: 4, task: 'To study React fundamentals' },
 ];
-const doneTaskArr = [{ id: 5, task: 'To study React fundamentals' }];
-
-const existTasks = localStorage.getItem('tasks');
-if (!existTasks) {
-  localStorage.setItem('tasks', JSON.stringify(taskListArr));
-}
-const parsedTasks = JSON.parse(existTasks);
+const doneTaskArr = JSON.parse(localStorage.getItem('doneTasks')) || [{ id: 5, task: 'To study React fundamentals' }];
 
 const updateMarkup = (tasks) => {
   const markup = tasks
@@ -43,62 +37,23 @@ const updateMarkup = (tasks) => {
   tasksAmount.textContent = tasks.length;
 };
 
-updateMarkup(parsedTasks);
-
-addBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-
-  if (!input.value.length) {
-    error.textContent = 'Enter a value';
-  } else {
-    const newTask = { id: Date.now(), task: input.value };
-
-    parsedTasks.push(newTask);
-    localStorage.setItem('tasks', JSON.stringify(parsedTasks));
-    updateMarkup(parsedTasks);
-
-    input.value = '';
-  }
-});
-
-input.addEventListener('input', (e) => {
-  if (e.target.value) {
-    error.textContent = '';
-  }
-});
-
 const onDelete = (e) => {
   const deleteBtn = e.target.closest('#deleteBtn');
 
   if (deleteBtn) {
     const taskId = Number(deleteBtn.getAttribute('key'));
 
-    parsedTasks.map((task) => {
+    taskListArr.map((task) => {
       if (taskId === task.id) {
-        const idxToDelete = parsedTasks.indexOf(task);
+        const idxToDelete = taskListArr.indexOf(task);
 
-        parsedTasks.splice(idxToDelete, 1);
-        localStorage.setItem('tasks', JSON.stringify(parsedTasks));
-        updateMarkup(parsedTasks);
+        taskListArr.splice(idxToDelete, 1);
+        localStorage.setItem('tasks', JSON.stringify(taskListArr));
+        updateMarkup(taskListArr);
       }
     });
   }
 };
-taskList.addEventListener('click', onDelete);
-
-//
-//
-
-//
-
-//
-
-const doneTasks = localStorage.getItem('doneTasks');
-
-if (!doneTasks) {
-  localStorage.setItem('doneTasks', JSON.stringify(doneTaskArr));
-}
-const parsedDoneTasks = JSON.parse(doneTasks);
 
 const updateMarkupDoneTask = (doneTasks) => {
   const markup = doneTasks
@@ -113,31 +68,27 @@ const updateMarkupDoneTask = (doneTasks) => {
   doneTasksAmount.textContent = doneTasks.length;
 };
 
-updateMarkupDoneTask(parsedDoneTasks);
-
 const doneTask = (e) => {
   const checkBtn = e.target.closest('#check');
 
   if (checkBtn) {
     const taskId = Number(checkBtn.getAttribute('key'));
 
-    parsedTasks.map((task) => {
+    taskListArr.map((task) => {
       if (taskId === task.id) {
-        parsedDoneTasks.push(task);
-        localStorage.setItem('doneTasks', JSON.stringify(parsedDoneTasks));
-        updateMarkupDoneTask(parsedDoneTasks);
+        doneTaskArr.push(task);
+        localStorage.setItem('doneTasks', JSON.stringify(doneTaskArr));
+        updateMarkupDoneTask(doneTaskArr);
 
-        const idxToDelete = parsedTasks.indexOf(task);
+        const idxToDelete = taskListArr.indexOf(task);
 
-        parsedTasks.splice(idxToDelete, 1);
-        localStorage.setItem('tasks', JSON.stringify(parsedTasks));
-        updateMarkup(parsedTasks);
+        taskListArr.splice(idxToDelete, 1);
+        localStorage.setItem('tasks', JSON.stringify(taskListArr));
+        updateMarkup(taskListArr);
       }
     });
   }
 };
-
-taskList.addEventListener('click', doneTask);
 
 const reversal = (e) => {
   const doneTask = e.target.closest('#task-item-done');
@@ -145,20 +96,46 @@ const reversal = (e) => {
   if (doneTask) {
     const taskId = Number(doneTask.getAttribute('key'));
 
-    parsedDoneTasks.map((task) => {
+    doneTaskArr.map((task) => {
       if (taskId === task.id) {
-        parsedTasks.push(task);
-        localStorage.setItem('tasks', JSON.stringify(parsedTasks));
-        updateMarkup(parsedTasks);
+        taskListArr.push(task);
+        localStorage.setItem('tasks', JSON.stringify(taskListArr));
+        updateMarkup(taskListArr);
 
-        const idxToDelete = parsedDoneTasks.indexOf(task);
+        const idxToDelete = doneTaskArr.indexOf(task);
 
-        parsedDoneTasks.splice(idxToDelete, 1);
-        localStorage.setItem('doneTasks', JSON.stringify(parsedDoneTasks));
-        updateMarkupDoneTask(parsedDoneTasks);
+        doneTaskArr.splice(idxToDelete, 1);
+        localStorage.setItem('doneTasks', JSON.stringify(doneTaskArr));
+        updateMarkupDoneTask(doneTaskArr);
       }
     });
   }
 };
 
+addBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  if (!input.value.length) {
+    error.textContent = 'Enter a value';
+  } else {
+    const newTask = { id: Date.now(), task: input.value };
+
+    taskListArr.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(taskListArr));
+    updateMarkup(taskListArr);
+
+    input.value = '';
+  }
+});
+taskList.addEventListener('click', onDelete);
+taskList.addEventListener('click', doneTask);
 taskListDone.addEventListener('click', reversal);
+
+input.addEventListener('input', (e) => {
+  if (e.target.value) {
+    error.textContent = '';
+  }
+});
+
+updateMarkupDoneTask(doneTaskArr);
+updateMarkup(taskListArr);
