@@ -25,9 +25,12 @@
   outline: none;
 }
 
+.input-block {
+  margin-bottom: 60px;
+}
+
 .input-container {
   display: flex;
-  margin-bottom: 60px;
 }
 
 .plus-btn {
@@ -36,12 +39,25 @@
   padding: 9px;
 
   border-radius: 10px;
-  background: #9e78cf;
+  background-color: #9e78cf;
+  transition: background-color 0.4s ease-out;
+}
+
+.plus-btn:hover {
+  background-color: #3e1671;
 }
 
 .icon-plus {
   width: 22px;
   height: 22px;
+}
+
+.error-message {
+  margin-top: 8px;
+  color: #ff3636;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .title {
@@ -96,15 +112,24 @@
   height: 22px;
 }
 
+.icon-check:hover {
+  stroke: #ffffff;
+}
+
 .icon-trash {
   width: 22px;
   height: 22px;
+}
+
+.icon-trash:hover {
+  stroke: #ffffff;
 }
 
 .task-item-done {
   width: 100%;
   height: 75px;
   padding: 28px 20px;
+  border: 1px solid transparent;
 
   color: #78cfb0;
   font-family: Inter;
@@ -116,6 +141,11 @@
   text-decoration: line-through;
 
   cursor: pointer;
+  transition: border 0.4s ease-out;
+}
+
+.task-item-done:hover {
+  border: 1px solid #9e78cf;
 }
 
 .task-item-done:not(:last-child) {

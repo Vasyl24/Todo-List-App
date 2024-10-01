@@ -13,14 +13,18 @@
 
   <body class="background">
     <div class="container">
-      <form class="input-container">
-        <input type="text" class="input-field" id="input" placeholder="Add a new task" />
-        <button class="plus-btn" id="plus-btn" type="submit">
-          <svg class="icon-plus">
-            <use href="./sprite.svg#icon-plus"></use>
-          </svg>
-        </button>
-      </form>
+      <div class="input-block">
+        <form class="input-container" id="input-container">
+          <input type="text" class="input-field" id="input" placeholder="Add a new task" />
+          <button class="plus-btn" id="plus-btn" type="submit">
+            <svg class="icon-plus">
+              <use href="./sprite.svg#icon-plus"></use>
+            </svg>
+          </button>
+        </form>
+
+        <p class="error-message" id="error-message"></p>
+      </div>
 
       <h2 class="title">Tasks to do - <span id="tasks-amount"></span></h2>
 

@@ -1,4 +1,6 @@
 const input = document.querySelector('#input');
+const inputContainer = document.querySelector('#input-container');
+const error = document.querySelector('#error-message');
 const addBtn = document.querySelector('#plus-btn');
 const taskList = document.querySelector('#task-list');
 const tasksAmount = document.querySelector('#tasks-amount');
@@ -23,7 +25,7 @@ const updateMarkup = (tasks) => {
   const markup = tasks
     .map(
       (taskItem) => `<li class="task-item" key='${taskItem.id}'>
-          <p>${taskItem.task}</p>
+          <p>${taskItem.task.length > 33 ? taskItem.task.slice(0, 33) + '...' : taskItem.task}</p>
           <div class="icon-container">
             <button class="task-btn" id="check" key='${taskItem.id}'>
               <svg class="icon-check"><use href="./sprite.svg#icon-check"></use></svg>
@@ -45,14 +47,24 @@ updateMarkup(parsedTasks);
 
 addBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  const inputText = input.value.length > 33 ? input.value.slice(0, 33) + '...' : input.value;
-  const newTask = { id: Date.now(), task: inputText };
 
-  parsedTasks.push(newTask);
-  localStorage.setItem('tasks', JSON.stringify(parsedTasks));
-  updateMarkup(parsedTasks);
+  if (!input.value.length) {
+    error.textContent = 'Enter a value';
+  } else {
+    const newTask = { id: Date.now(), task: input.value };
 
-  input.value = '';
+    parsedTasks.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(parsedTasks));
+    updateMarkup(parsedTasks);
+
+    input.value = '';
+  }
+});
+
+input.addEventListener('input', (e) => {
+  if (e.target.value) {
+    error.textContent = '';
+  }
 });
 
 const onDelete = (e) => {
