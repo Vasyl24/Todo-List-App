@@ -1,4 +1,4 @@
-# To do list site
+# To-do list app
 
 This project was created with HTML, CSS, and JS. Here I used localstorage for saving tasks and done tasks. You can add new tasks that you need to do, check that you've done the task, and delete the task. You can see how many tasks do you have and how many you've done.
 
