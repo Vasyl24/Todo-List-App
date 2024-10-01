@@ -110,19 +110,23 @@
 .icon-check {
   width: 22px;
   height: 22px;
+  fill: #9e78cf;
+  transition: fill 0.4s ease-out;
 }
 
 .icon-check:hover {
-  stroke: #ffffff;
+  fill: #ffffff;
 }
 
 .icon-trash {
   width: 22px;
   height: 22px;
+  fill: #9e78cf;
+  transition: fill 0.4s ease-out;
 }
 
 .icon-trash:hover {
-  stroke: #ffffff;
+  fill: #ffffff;
 }
 
 .task-item-done {
